@@ -1,0 +1,7 @@
+floyd 弗洛依德
+Dijskra 蒂斯克拉
+prim 最小生成树 稠密图
+Kruskal 稀疏图 并查集 判断
+字符串在循环中+时，一定记住在循环外new StringBuilder，学会使用StringBuilder
+dp也是使用dfs bfs，但是记住如果超时的话可能时dp的中间状态没有保存，记得保存dp的中间状态
+
