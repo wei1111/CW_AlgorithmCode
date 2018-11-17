@@ -50,6 +50,7 @@ public class WordBreak {
     @Test
     public void test() {
         boolean[] isOk = new boolean[6];
+
         for (int i = 0; i < isOk.length; i++) {
             System.out.println(isOk[i]);
         }

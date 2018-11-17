@@ -52,6 +52,9 @@ import java.util.Arrays;
  */
 public class HeapSort {
     public static void sort(Integer[] nums) {
+        if (nums == null || nums.length < 2) {
+            return;
+        }
         //建立大顶堆前 [4, 6, 8, 5, 9]
         Integer length = nums.length;
 

@@ -19,6 +19,9 @@ import java.util.Arrays;
 
 public class QuickSort {
     public void quickSort(int i, int j, Comparable[] nums) {
+        if (nums == null || nums.length < 2) {
+            return;
+        }
         if (i >= j) {
             return;
         }

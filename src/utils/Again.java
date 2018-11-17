@@ -51,26 +51,25 @@ public class Again {
     }
 
     public void mergeSort(Integer[] nums) {
-        if (nums.length <= 0) {
+        if (nums == null || nums.length < 2) {
             return;
         }
         Integer[] temp = new Integer[nums.length];
         mSort(nums, 0, nums.length - 1, temp);
-
-
     }
 
     private void mSort(Integer[] nums, int start, int end, Integer[] temp) {
         if (start < end) {
-            int mid = (start + end) / 2;
+//            int mid = (start + end) / 2;
+            int mid = start + (end - start) >> 1;
             mSort(nums, start, mid, temp);
-            mSort(nums, mid+1, end, temp);
+            mSort(nums, mid + 1, end, temp);
             merge(nums, start, mid, end, temp);
         }
     }
 
     private void merge(Integer[] nums, int start, int mid, int end, Integer[] temp) {
-        int m = mid+1;
+        int m = mid + 1;
         int b = start;
         int i = 0;
         while (start <= mid && m <= end) {
@@ -80,7 +79,7 @@ public class Again {
                 temp[i++] = nums[m++];
             }
         }
-        while (start <= mid ) {
+        while (start <= mid) {
             temp[i++] = nums[start++];
         }
         while (m <= end) {
@@ -108,6 +107,57 @@ public class Again {
         }
     }
 
+
+    //二分查找
+    public int binSearch(int[] nums, int target) {
+        int len = nums.length;
+        int result = bSearch(nums, 0, len - 1, target);
+        return result;
+    }
+
+    private int bSearch(int[] nums, int start, int end, int target) {
+        int mid = (start + end) / 2;
+        if (start <= end) {
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[mid] > target) {
+                return bSearch(nums, start, mid - 1, target);
+            }
+            if (nums[mid] < target) {
+                return bSearch(nums, mid + 1, end, target);
+            }
+        }
+        return -1;
+    }
+
+    private int bSearch2(int[] nums, int start, int end, int target) {
+        int mid = (start + end) / 2;
+        while (start <= end) {
+            if (nums[mid] == target) {
+                return mid;
+            }
+            if (nums[mid] > target) {
+                end = mid - 1;
+            }
+            if (nums[mid] < target) {
+                start = mid + 1;
+            }
+            mid = (start + end) / 2;
+        }
+        return -1;
+    }
+
+
+    @Test
+    public void testBinSearch() {
+        int[] nums = {1};
+        Arrays.sort(nums);
+        System.out.println(Arrays.toString(nums));
+        int x = 1;
+        System.out.println("正确：" + Arrays.binarySearch(nums, x));
+        System.out.println(binSearch(nums, x));
+    }
 
     @Test
     public void test() {
