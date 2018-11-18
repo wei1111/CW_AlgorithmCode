@@ -3,13 +3,15 @@ package utils;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * @Author: wei1
  * @Date: Create in 2018/11/5 21:44
  * @Description:
  */
-public class Again {
+public class Again implements Comparable{
     public void quickSort(Integer[] nums) {
         qSort(nums, 0, nums.length - 1);
     }
@@ -148,6 +150,25 @@ public class Again {
         return -1;
     }
 
+    @Test
+    public void testPriorityQueue() {
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2-o1;
+            }
+        });
+        priorityQueue.add(1);
+        priorityQueue.add(3);
+        priorityQueue.add(2);
+        priorityQueue.add(5);
+        priorityQueue.add(4);
+
+        while (!priorityQueue.isEmpty()) {
+            Integer temp = priorityQueue.poll();
+            System.out.println(temp);
+        }
+    }
 
     @Test
     public void testBinSearch() {
@@ -177,5 +198,10 @@ public class Again {
         System.out.println("mergeSort前: " + Arrays.toString(mergeNums));
         mergeSort(mergeNums);
         System.out.println("mergeSort后: " + Arrays.toString(mergeNums));
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
     }
 }
