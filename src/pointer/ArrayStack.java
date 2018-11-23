@@ -22,7 +22,7 @@ public class ArrayStack {
     //    要求实现三个方法
     public void push(Integer value) {
         if (index.equals(size)) {
-            throw new IllegalArgumentException("The stack is full");
+            throw new IllegalArgumentException("The stack_queue is full");
         }
         //注意index指向最后一个数前一个
         arr[index++] = value;

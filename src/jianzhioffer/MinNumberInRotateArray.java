@@ -1,4 +1,4 @@
-package jzoffer;
+package jianzhioffer;
 
 import org.junit.Test;
 

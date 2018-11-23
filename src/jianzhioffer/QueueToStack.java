@@ -1,4 +1,4 @@
-package jzoffer;
+package jianzhioffer;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,0 +1,154 @@
+package tree;
+
+import java.util.Stack;
+
+/**
+ * @Author: wei1
+ * @Date: Create in 2018/11/21 21:43
+ * @Description:
+ */
+public class PreInPosTraversal {
+    public static void preOrderRecur(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        System.out.print(head.val + " ");
+
+        preOrderRecur(head.left);
+        preOrderRecur(head.right);
+    }
+
+    public static void inOrderRecur(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        inOrderRecur(head.left);
+        System.out.print(head.val + " ");
+        inOrderRecur(head.right);
+    }
+
+    public static void posOrderRecur(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        posOrderRecur(head.left);
+        posOrderRecur(head.right);
+        System.out.print(head.val + " ");
+    }
+
+    //先序遍历的非递归的写法，反着它的顺序写
+    // 1.先放中节点
+    // 2.有右节点放右节点
+    // 3.有左节点放左节点
+    public static void preOrderUnRecur(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        System.out.print("pre-order: ");
+
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(head);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            System.out.print(pop.val + " ");
+            if (pop.right != null) {
+                stack.add(pop.right);
+            }
+            if (pop.left != null) {
+                stack.add(pop.left);
+            }
+        }
+    }
+
+    //中序遍历的非递归的写法，
+    // 1.左节点不为null则压入左节点
+    // 2.左节点为null时，pop并打印，左节点
+    // 3.在往右，右节点为null时，pop并打印
+    // 4.右节点不为null时，压入右节点
+    //还是背下来吧
+    public static void inOrderUnRecur(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        System.out.print("in-order: ");
+
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || head != null) {
+            if (head != null) {
+                stack.add(head);
+                head = head.left;
+            } else {
+                head = stack.pop();
+                System.out.print(head.val + " ");
+                head = head.right;
+            }
+        }
+    }
+
+
+    //和前序遍历一样的只不过是使用了两个栈
+    //在前序遍历的时候将 中 右 左 节点压栈
+    //在原来是打印的地方不打印，将本该打印的节点压到第二个栈中
+    //这样第二个栈的出栈顺序就是 右 左 中了
+    public static void posOrderUnRecur1(TreeNode head) {
+        if (head == null) {
+            return;
+        }
+        System.out.print("pos-order: ");
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack.add(head);
+        while (!stack.isEmpty()) {
+            head = stack.pop();
+            //在这里不打印，这里我们放到第二个栈中去
+            stack2.add(head);
+            if (head.left != null) {
+                stack.add(head.left);
+            }
+            if (head.right != null) {
+                stack.add(head.right);
+            }
+        }
+        while (!stack2.isEmpty()) {
+            System.out.print(stack2.pop().val + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        TreeNode head = new TreeNode(5);
+        head.left = new TreeNode(3);
+        head.right = new TreeNode(8);
+        head.left.left = new TreeNode(2);
+        head.left.right = new TreeNode(4);
+        head.left.left.left = new TreeNode(1);
+        head.right.left = new TreeNode(7);
+        head.right.left.left = new TreeNode(6);
+        head.right.right = new TreeNode(10);
+        head.right.right.left = new TreeNode(9);
+        head.right.right.right = new TreeNode(11);
+
+        // recursive
+        System.out.println("==============recursive==============");
+        System.out.print("pre-order: ");
+        preOrderRecur(head);
+        System.out.println();
+        System.out.print("in-order: ");
+        inOrderRecur(head);
+        System.out.println();
+        System.out.print("pos-order: ");
+        posOrderRecur(head);
+        System.out.println();
+
+        // unrecursive
+        System.out.println("============unrecursive=============");
+        preOrderUnRecur(head);
+        System.out.println();
+        inOrderUnRecur(head);
+        System.out.println();
+        posOrderUnRecur1(head);
+//        posOrderUnRecur2(head);
+
+    }
+
+
+}

@@ -13,3 +13,4 @@ E poll()
 检索并删除此队列的头，如果此队列为空，则返回 null 。
 comparator比较器 o1-o2 结果为负数则o1在前面 正数则o2在前
 netstat -antp |grep tomcat
+在QQ已登录的情况下，同时按住键盘上的ctrl+alt+a键，此时就会出现截图框，用鼠标画出你想要截取的屏幕区域

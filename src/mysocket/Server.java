@@ -1,6 +1,7 @@
 package mysocket;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -9,7 +10,8 @@ import java.net.Socket;
  * @Date: Create in 2018/11/18 15:54
  * @Description:
  */
-public class Server {
+public class Server implements Serializable {
+    private static final long serialVersionUID = 1426844086965820852L;
     private ServerSocket serverSocket;
 
     public Server(int port) {

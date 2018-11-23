@@ -62,6 +62,7 @@ public class HeapSort {
             adjustHeap(nums, i, length);
             //建立大顶堆后 [9, 6, 8, 5, 4]
         }
+
         System.out.println("建堆后：" + Arrays.toString(nums));
 
         //调整堆 有点巧妙

@@ -88,5 +88,25 @@ public class kSumII {
         for (int i = 0; i < result.size(); i++) {
             System.out.println(result.get(i).toString());
         }
+
+        float f = 1.4f;
+        double d = 1.4d;
+        float f1 = 1.5f;
+        double d1 = 1.5d;
+
+        while (true) {
+            System.out.println(f);
+            System.out.println((double)f);
+            System.out.println(d);
+            System.out.println(f - d);
+            System.out.println(f == d);
+
+            System.out.println("--------");
+            System.out.println(f1);
+            System.out.println((double) f1);
+            System.out.println(d1);
+            System.out.println(f1 - d1);
+            System.out.println(f1 == d1);
+        }
     }
 }
