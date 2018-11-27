@@ -59,7 +59,7 @@ public class Subsets {
         }
         Arrays.sort(nums);
         int startIndex = 0;
-        helper2(list,nums,startIndex,results);
+        helper2(list, nums, startIndex, results);
 //        helper1(results, list, nums);
         return results;
     }
@@ -83,9 +83,9 @@ public class Subsets {
     // 递归三要素
     // 1. 递归的定义：在 Nums 中找到所有以 subset 开头的的集合，并放到 results
     private void helper2(List<Integer> subset,
-                        int[] nums,
-                        int startIndex,
-                        List<List<Integer>> results) {
+                         int[] nums,
+                         int startIndex,
+                         List<List<Integer>> results) {
         // 2. 递归的拆解
         // deep copy
         // results.add(subset);
@@ -108,11 +108,45 @@ public class Subsets {
         // return;
     }
 
+
+    public List<List<Integer>> subsets2(int[] nums) {
+        // write your code here
+        List<List<Integer>> results = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        if (nums == null) {
+            return results;
+        }
+        if (nums.length == 0) {
+            results.add(list);
+            return results;
+        }
+        Arrays.sort(nums);
+
+        dfs(nums, results, list, 0);
+        return results;
+    }
+
+    private void dfs(int[] nums, List<List<Integer>> results, List<Integer> list, int i) {
+        if (i == nums.length) {
+            results.add(list);
+            return;
+        }
+        dfs(nums, results, new ArrayList<>(list), i + 1);
+        list.add(nums[i]);
+        dfs(nums, results, new ArrayList<>(list), i + 1);
+    }
+
     @Test
     public void testSubsets() {
         List<List<Integer>> results = subsets(new int[]{1, 2, 3, 4});
         for (int i = 0; i < results.size(); i++) {
-            System.out.println(results.get(i).toString());
+            System.out.println(i + ":" + results.get(i).toString());
+        }
+
+        System.out.println("====================");
+        List<List<Integer>> results2 = subsets2(new int[]{1, 2, 3, 4});
+        for (int i = 0; i < results2.size(); i++) {
+            System.out.println(i + ":" +  results2.get(i).toString());
         }
     }
 }

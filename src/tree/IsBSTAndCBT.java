@@ -1,8 +1,7 @@
-package utils;
+package tree;
 
 import org.junit.Test;
-import tree.PrintBinaryTree;
-import tree.TreeNode;
+import utils.TreeNodeUtil;
 
 import java.util.LinkedList;
 import java.util.Stack;
@@ -16,7 +15,7 @@ import java.util.Stack;
 public class IsBSTAndCBT {
     public static boolean isBST(TreeNode head) {
         if (head == null) {
-            //空树也是平衡的
+            //空树也是的
             return true;
         }
         Stack<TreeNode> stack = new Stack<>();
