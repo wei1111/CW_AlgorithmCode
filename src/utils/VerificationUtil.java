@@ -35,6 +35,14 @@ public class VerificationUtil {
         return res;
     }
 
+    public static int[] getLenRandomIntArray(int len, int maxValue) {
+        int[] res = new int[len];
+        for (int i = 0; i != res.length; i++) {
+            res[i] = (int) (Math.random() * maxValue);
+        }
+        return res;
+    }
+
     //判断两个数组是否相等
     public static boolean isEqual(int[] arr1, int[] arr2) {
         if ((arr1 == null && arr2 != null) || (arr1 != null && arr2 == null)) {
