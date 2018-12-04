@@ -1,5 +1,9 @@
 package tree;
 
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Stack;
 
 /**
@@ -8,6 +12,59 @@ import java.util.Stack;
  * @Description:
  */
 public class PreInPosTraversal {
+
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        if (root == null) {
+            return arrayList;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        stack.add(root);
+        while (!stack.isEmpty()) {
+            TreeNode pop = stack.pop();
+            arrayList.add(pop.val);
+            if (pop.right != null) {
+                stack.add(pop.right);
+            }
+            if (pop.left != null) {
+                stack.add(pop.left);
+            }
+        }
+        return arrayList;
+    }
+
+    public ArrayList<Integer> postorderTraversal2(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        if (root == null) {
+            return list;
+        }
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            list.add(0, node.val);//每次插入到头部
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+        }
+        return list;
+    }
+
+    @Test
+    public void test() {
+        TreeNode n = new TreeNode(3);
+        n.left = new TreeNode(2);
+        n.right = new TreeNode(1);
+        ArrayList<Integer> arrayList = postorderTraversal(n);
+        Iterator<Integer> iterator = arrayList.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next() + " ");
+        }
+    }
+
     public static void preOrderRecur(TreeNode head) {
         if (head == null) {
             return;

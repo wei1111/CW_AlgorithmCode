@@ -19,25 +19,6 @@ public class ThreadOrderRun2 {
     Condition condition2 = lock.newCondition();
     Condition condition3 = lock.newCondition();
 
-    private void order(int n) throws InterruptedException {
-        Thread tmp;
-        for (int i = 0; i < n; i++) {
-            tmp = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        System.out.println(Thread.currentThread().getName());
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, "thread--" + i);
-            tmp.start();
-            tmp.join();
-        }
-    }
-
     private void firstRun(int n) {
         lock.lock();
         try {

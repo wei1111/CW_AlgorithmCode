@@ -22,14 +22,16 @@ public class ThreadOrderRun1 {
                         e.printStackTrace();
                     }
                 }
-            },"thread--"+i);
+            }, "thread--" + i);
             tmp.start();
+            //当我们调用某个线程的这个方法时，这个方法会挂起调用线程，
+            //直到被调用线程结束执行，调用线程才会继续执行。
             tmp.join();
         }
     }
 
     @Test
-    public void testOrder(){
+    public void testOrder() {
         try {
             order(10);
         } catch (InterruptedException e) {

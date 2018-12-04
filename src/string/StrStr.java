@@ -1,4 +1,4 @@
-package stringQuestion;
+package string;
 
 public class StrStr {
     /**
