@@ -7,7 +7,8 @@ import java.util.Arrays;
 /**
  * @Author: wei1
  * @Date: Create in 2018/11/16 10:51
- * @Description: There are N children standing in a line. Each child is assigned a rating value.
+ * @Description: There are N children standing in a line. Each child is assigned a
+ * rating value.
  * <p>
  * You are giving candies to these children subjected to the following requirements:
  * <p>

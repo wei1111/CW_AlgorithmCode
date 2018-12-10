@@ -45,11 +45,6 @@ public class WordBreak1 {
         return result;
     }
 
-    public ArrayList<String> wordBreak1(String s, Set<String> dict) {
-        HashMap<String, List<String>> dpMap = new HashMap<>(16);
-        return dfs(s, dict, dpMap);
-    }
-
     private void dfs(ArrayList<String> result, ArrayList<String> list, ArrayList<String> dict,
                      boolean[] color, String s) {
         if (toStr(list).equals(s)) {
@@ -59,7 +54,7 @@ public class WordBreak1 {
         for (int i = 0; i < dict.size(); i++) {
             if (!color[i]) {
                 String toS = toStr(list) + dict.get(i);
-                if (s.contains(toS) && toS.equals(s.substring(0, toS.length()))) {
+                if (s.startsWith(toS)) {
                     list.add(dict.get(i));
                     color[i] = true;
 
@@ -88,6 +83,11 @@ public class WordBreak1 {
             s.append(list.get(i));
         }
         return s.toString();
+    }
+
+    public ArrayList<String> wordBreak1(String s, Set<String> dict) {
+        HashMap<String, List<String>> dpMap = new HashMap<>(16);
+        return dfs(s, dict, dpMap);
     }
 
     public ArrayList<String> dfs(String s, Set<String> dict, HashMap<String, List<String>> map) {
@@ -124,11 +124,11 @@ public class WordBreak1 {
         List<String> list = Arrays.asList("aaaa", "aa", "a");
         /**
          ["a a a a a a a","aa a a a a a","a aa a a a a","a a aa a a a","aa aa a a a",
-          "aaaa a a a","a a a aa a a","aa a aa a a","a aa aa a a","a aaaa a a",
-          "a a a a aa a","aaa a aa a","a aa a aa a","a a aa aa a","aa aa aa a",
-          "aaaa aa a","a a aaaa a","aa aaaa a","a a a a a aa","aa a a a aa",
-          "a aa a a aa","a a aa a aa","aa aa a aa","aaaa a aa","a a a aa aa",
-          "aa a aa aa","a aaaa aa","a aaaa aa","a a a aaaa","aa a aaaa","a aa aaaa"]
+         "aaaa a a a","a a a aa a a","aa a aa a a","a aa aa a a","a aaaa a a",
+         "a a a a aa a","aaa a aa a","a aa a aa a","a a aa aa a","aa aa aa a",
+         "aaaa aa a","a a aaaa a","aa aaaa a","a a a a a aa","aa a a a aa",
+         "a aa a a aa","a a aa a aa","aa aa a aa","aaaa a aa","a a a aa aa",
+         "aa a aa aa","a aaaa aa","a aaaa aa","a a a aaaa","aa a aaaa","a aa aaaa"]
          */
         Set<String> dict = new HashSet<>(list);
         String s = "aaaaaaa";
