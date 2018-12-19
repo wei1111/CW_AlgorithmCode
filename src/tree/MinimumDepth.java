@@ -1,5 +1,8 @@
 package tree;
 
+import org.junit.Test;
+import utils.TreeNodeUtil;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,7 +21,7 @@ import java.util.Queue;
  * <p>
  * 非递归，思路是层序遍历，找到第一个左右结点都为null的情况，就返回
  */
-public class minimumDepth {
+public class MinimumDepth {
     public int run(TreeNode root) {
         if (root == null) {
             return 0;
@@ -43,5 +46,26 @@ public class minimumDepth {
             }
         }
         return result;
+    }
+
+    public int minimumDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null) {
+            return minimumDepth(root.right) + 1;
+        }
+        if (root.right == null) {
+            return minimumDepth(root.left) + 1;
+        }
+        return Math.min(minimumDepth(root.right), minimumDepth(root.left)) + 1;
+    }
+
+    @Test
+    public void test() {
+        TreeNode tree = TreeNodeUtil.getTree();
+        System.out.println(run(tree));
+        System.out.println(minimumDepth(tree));
+
     }
 }

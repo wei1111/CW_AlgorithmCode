@@ -57,6 +57,24 @@ public class BiggestSubBSTInTree {
                 .min), head.val));
     }
 
+    //在写一遍最大的搜索二叉子树
+    public ReturnType bb(TreeNode head) {
+        if (head == null) {
+            return new ReturnType(null, 0, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        }
+        ReturnType leftReturn = bb(head.left);
+        ReturnType rightReturn = bb(head.right);
+
+        if (head.left == leftReturn.head && head.right == rightReturn.head &&
+                head.val > leftReturn.max && head.val < rightReturn.min) {
+            return new ReturnType(head, leftReturn.size + rightReturn.size + 1, Math.max(Math.max
+                    (leftReturn.max, rightReturn.max), head.val),
+                    Math.min(Math.min(leftReturn.min, rightReturn.min), head.val));
+        } else {
+            return leftReturn.size > rightReturn.size ? leftReturn : rightReturn;
+        }
+    }
+
 
     public static TreeNode bigTreeNode(TreeNode head) {
         int[] record = new int[3]; // 0->size, 1->min, 2->max
@@ -140,11 +158,13 @@ public class BiggestSubBSTInTree {
 
         printTree(head);
         ReturnType result1 = new BiggestSubBSTInTree().process(head);
-        TreeNode result2 = bigTreeNode(head);
+//        TreeNode result2 = bigTreeNode(head);
+        ReturnType result2 = new BiggestSubBSTInTree().bb(head);
+
 
         printTree(result1.head);
-        printTree(result2);
-
+        printTree(result2.head);
+        System.out.println(result2.size);
     }
 
     @Test

@@ -81,4 +81,6 @@ public class SortList {
         ListNode listNode = sortList(l1);
         System.out.println(listNode);
     }
+
+
 }

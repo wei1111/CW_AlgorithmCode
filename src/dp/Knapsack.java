@@ -31,7 +31,6 @@ public class Knapsack {
         if (i == weights.length) {
             return 0;
         }
-
         if (i > 0) {
             alreadyweight[i] = alreadyweight[i - 1];
         }

@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Stack;
 
 /**
@@ -171,6 +172,27 @@ public class PreInPosTraversal {
         }
     }
 
+    //层次遍历
+    public ArrayList<Integer> PrintFromTopToBottom(TreeNode root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (root == null) {
+            return result;
+        }
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode poll = queue.poll();
+            result.add(poll.val);
+            if (poll.left != null) {
+                queue.add(poll.left);
+            }
+            if (poll.left != null) {
+                queue.add(poll.right);
+            }
+        }
+        return result;
+    }
+
     public static void main(String[] args) {
         TreeNode head = new TreeNode(5);
         head.left = new TreeNode(3);
@@ -188,12 +210,24 @@ public class PreInPosTraversal {
         System.out.println("==============recursive==============");
         System.out.print("pre-order: ");
         preOrderRecur(head);
+
+        System.out.println();
+        Demo.preOrderUnRecur(head);
+
         System.out.println();
         System.out.print("in-order: ");
         inOrderRecur(head);
+
+        System.out.println();
+        Demo.inOrderUnRecur(head);
+
         System.out.println();
         System.out.print("pos-order: ");
         posOrderRecur(head);
+
+        System.out.println();
+        posOrderRecur(head);
+
         System.out.println();
 
         // unrecursive

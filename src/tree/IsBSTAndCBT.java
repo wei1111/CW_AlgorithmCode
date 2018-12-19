@@ -13,6 +13,7 @@ import java.util.Stack;
  * 当前节点为null就弹出来，往右移
  */
 public class IsBSTAndCBT {
+    //思路就是通过中序遍历，如果是递增的就是BST
     public static boolean isBST(TreeNode head) {
         if (head == null) {
             //空树也是的

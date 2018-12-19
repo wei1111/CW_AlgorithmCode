@@ -10,11 +10,11 @@ import utils.TreeNodeUtil;
  */
 public class IsBalancedTree {
     private static class ReturnData {
-        private int leavlDiff;
+        private int gaodu;
         private boolean isBalancedTree;
 
-        public ReturnData(int leavlDiff, boolean isBalancedTree) {
-            this.leavlDiff = leavlDiff;
+        public ReturnData(int gaodu, boolean isBalancedTree) {
+            this.gaodu = gaodu;
             this.isBalancedTree = isBalancedTree;
         }
     }
@@ -33,17 +33,17 @@ public class IsBalancedTree {
             return new ReturnData(0, false);
         }
 
-        if (Math.abs(rightData.leavlDiff - leftData.leavlDiff) > 1) {
+        if (Math.abs(rightData.gaodu - leftData.gaodu) > 1) {
             return new ReturnData(0, false);
         }
 
-        return new ReturnData(Math.abs(rightData.leavlDiff - leftData.leavlDiff) + 1, true);
+        return new ReturnData(Math.abs(rightData.gaodu - leftData.gaodu) + 1, true);
     }
 
     @Test
     public void test() {
         TreeNode head = TreeNodeUtil.getTree();
         ReturnData balanced = isBalanced(head);
-        System.out.println(balanced.isBalancedTree+" : "+ balanced.leavlDiff);
+        System.out.println(balanced.isBalancedTree+" : "+ balanced.gaodu);
     }
 }

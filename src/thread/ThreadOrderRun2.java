@@ -80,20 +80,29 @@ public class ThreadOrderRun2 {
             public void run() {
                 firstRun(5);
             }
-        },"thread---1").start();
+        }, "thread---1").start();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 secondRun(5);
             }
-        },"thread---2").start();
+        }, "thread---2").start();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 thirdRun(5);
             }
-        },"thread---3").start();
+        }, "thread---3").start();
+    }
+
+    @Test
+    public void test() {
+        Integer i = new Integer(1);
+        Integer j = new Integer(1);
+        Integer k = 1;
+        System.out.println(i == j);
+        System.out.println(i == k);
     }
 }

@@ -76,4 +76,36 @@ public class Permute {
             System.out.println(result.get(i).toString());
         }
     }
+
+    @Test
+    public void test() {
+//        System.out.println(1 << 30);
+//        System.out.println(1 << 31);
+//        System.out.println(1 << 32);
+//        System.out.println(Integer.MAX_VALUE);
+//
+//        Integer i1 = -2;
+//        Integer i2 = 2;
+//        System.out.println(Integer.toBinaryString(i1 >>> 32));
+//        System.out.println(Integer.toBinaryString(i1 >>> 33));
+//        System.out.println(Integer.toBinaryString(i1));
+//        System.out.println(Integer.toBinaryString(i2 >>> 4));
+//        System.out.println(Integer.toBinaryString(i2));
+        String str = "1000000000000000000";
+        int i = Integer.parseInt(str, 2);
+        System.out.println(i);
+        System.out.println(Integer.toBinaryString(i));
+
+        int i1 = get(i);
+        System.out.println(Integer.toBinaryString(i1));
+    }
+
+    public int get(int n) {
+        n |= n >>> 1;
+        n |= n >>> 2;
+        n |= n >>> 4;
+        n |= n >>> 8;
+        n |= n >>> 16;
+        return n;
+    }
 }

@@ -7,8 +7,9 @@ import java.util.Arrays;
 /**
  * @Author: wei1
  * @Date: Create in 2018/11/16 22:57
- * @Description:小和问题，一个数左边比他小的数的合为这个数的小和，求一个数组的小和 [1, 3, 4, 2, 5] 16
- * 小和问题是一个merge的问题
+ * @Description: 小和问题，一个数左边比他小的数的合为这个数的小和，求一个数组的小和 [1, 3, 4, 2, 5] 16
+ * 小和问题是一个merge的问题,小和问题是乘
+ * 逆序对为题是加
  */
 public class SmallSum {
     public int smallSum(Integer[] nums) {
