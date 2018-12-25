@@ -100,6 +100,7 @@ public class Subsets {
             helper2(subset, nums, i + 1, results);
             // [1,2] -> [1]  回溯
             subset.remove(subset.size() - 1);
+//            subset.remove
 //            System.out.println("-:"+subset.toString());
 
         }
@@ -146,7 +147,20 @@ public class Subsets {
         System.out.println("====================");
         List<List<Integer>> results2 = subsets2(new int[]{1, 2, 3, 4});
         for (int i = 0; i < results2.size(); i++) {
-            System.out.println(i + ":" +  results2.get(i).toString());
+            System.out.println(i + ":" + results2.get(i).toString());
         }
+    }
+
+    @Test
+    public void test() {
+//        int s = 1010 b;
+        System.out.println(Float.MAX_VALUE);
+        System.out.println(Float.MIN_VALUE);
+        System.out.println(Integer.MIN_VALUE);
+        System.out.println(Double.MIN_VALUE);
+        System.out.println(Float.MIN_VALUE < -1f);
+        System.out.println(Float.MIN_VALUE > -1f);
+        System.out.println(Float.MIN_VALUE > 1f);
+
     }
 }

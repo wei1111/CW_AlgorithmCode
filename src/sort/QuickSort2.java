@@ -8,8 +8,7 @@ import java.util.Arrays;
 /**
  * @Author: wei1
  * @Date: Create in 2018/11/17 15:47
- * @Description:使用荷兰国旗改良过的快排
- * 这个是几乎最好的快排了，使用了随机选择划分的数
+ * @Description:使用荷兰国旗改良过的快排 这个是几乎最好的快排了，使用了随机选择划分的数
  * 空间复杂度为logn这个是最好的情况，在每次的划分的数在最中间的情况下，
  * 最差的情况下需要递归栈中记录的划分值就是partition的返回值为所有的数，那么就是n
  * 时间复杂度平均为nlogn
@@ -32,6 +31,13 @@ public class QuickSort2 {
         }
     }
 
+    @Test
+    public void test1() {
+        Integer[] arr = {0, 1, 1, 1 ,0};
+        int[] partition = partition(arr, 0, arr.length-1, 1);
+        System.out.println(partition[0] + " " + partition[1]);
+    }
+
     private int[] partition(Integer[] nums, int start, int end, Integer p) {
         int less = start - 1;
         int more = end + 1;
@@ -46,7 +52,7 @@ public class QuickSort2 {
             }
         }
 
-        System.out.println(p + " : " + Arrays.toString(nums));
+        System.out.println(less + " " + more);
         return new int[]{less + 1, more - 1};
     }
 
@@ -59,8 +65,8 @@ public class QuickSort2 {
         quickSort(nums);
         System.out.println("partition: " + Arrays.toString(nums));
 
-        System.out.println((int)-1.5);
-        System.out.println((int)-0.4);
-        System.out.println((int)-0.9);
+        System.out.println((int) -1.5);
+        System.out.println((int) -0.4);
+        System.out.println((int) -0.9);
     }
 }

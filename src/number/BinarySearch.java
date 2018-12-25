@@ -4,8 +4,8 @@ import org.junit.Test;
 
 public class BinarySearch {
     /**
-     * @param nums:   The integer array.
-     * @param target: Target to find.
+     * @param : The integer array.
+     * @param : Target to find.
      * @return: The first position of target. Position starts from 0.
      * <p>
      * 二分查找
@@ -20,22 +20,37 @@ public class BinarySearch {
 
     @Test
     public void testBinarySearch() {
-        int[] nums = new int[]{1, 2, 3, 4};
-        System.out.println(binSeach(nums, 0, nums.length - 1, 0));
-        System.out.println(-4 >>> 1);
-        System.out.println(-4 >> 1);
+        int[] nums = new int[]{1};
+        System.out.println(binSearch(nums, 0, nums.length - 1, 1));
     }
 
-    public int binSeach(int[] nums, int f, int l, int target) {
-        if (f > l) {
+    public int binSearch(int[] nums, int low, int high, int target) {
+        if (nums == null || nums.length < 1) {
             return -1;
         }
-        if (nums[(l + f) / 2] == target) {
-            return (l + f) / 2;
-        } else if (nums[(l + f) / 2] < target) {
-            return binSeach(nums, (l + f) / 2 + 1, l, target);
-        } else {
-            return binSeach(nums, f, (l + f) / 2 - 1, target);
+        int mid;
+        while (low <= high) {
+            mid = low + (high - low) >> 1;
+            if (nums[mid] < target) {
+                low = mid + 1;
+            } else if (nums[mid] > target) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
         }
+        return -1;
     }
+//    public int binSearch(int[] nums, int f, int l, int target) {
+//        if (f > l) {
+//            return -1;
+//        }
+//        if (nums[(l + f) / 2] == target) {
+//            return (l + f) / 2;
+//        } else if (nums[(l + f) / 2] < target) {
+//            return binSearch(nums, (l + f) / 2 + 1, l, target);
+//        } else {
+//            return binSearch(nums, f, (l + f) / 2 - 1, target);
+//        }
+//    }
 }

@@ -43,7 +43,6 @@ public class ClientHandler {
 
             }
 
-
         } catch (IOException e) {
             e.printStackTrace();
         }

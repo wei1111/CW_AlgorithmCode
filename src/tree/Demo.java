@@ -17,7 +17,7 @@ public class Demo {
         stack.push(head);
         while (!stack.isEmpty()) {
             TreeNode pop = stack.pop();
-            System.out.print(pop.val+" ");
+            System.out.print(pop.val + " ");
             if (pop.right != null) {
                 stack.push(pop.right);
             }
@@ -33,13 +33,25 @@ public class Demo {
             return;
         }
         Stack<TreeNode> stack = new Stack<>();
+        boolean flag = true;
+        TreeNode former = null;
+        TreeNode result = null;
         while (!stack.isEmpty() || head != null) {
             if (head != null) {
-                stack.add(head);
+                stack.push(head);
                 head = head.left;
             } else {
                 head = stack.pop();
-                System.out.print(head.val+" ");
+                if (flag) {
+                    result = head;
+                    former = result;
+                    flag = false;
+                } else {
+                    former.right = head;
+                    head.left = former;
+                    former = head;
+                }
+//                System.out.print(head.val + " ");
                 head = head.right;
             }
         }

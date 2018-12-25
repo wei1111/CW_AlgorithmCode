@@ -46,7 +46,6 @@ public class Money_Problem {
         for (int j = 0; j < row; j++) {
             dp[j][col-1] = true;
         }
-
 //      process1(arr, i + 1, sum, aim) || process1(arr, i + 1, sum + arr[i], aim);
         for (int i = row - 2; i >= 0; i--) {
             for (int j = col - 2; j >= 0; j--) {

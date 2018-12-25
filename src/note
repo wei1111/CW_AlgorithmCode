@@ -15,6 +15,8 @@ comparator比较器 o1-o2 结果为负数则o1在前面 正数则o2在前
 netstat -antp |grep tomcat
 在QQ已登录的情况下，同时按住键盘上的ctrl+alt+a键，此时就会出现截图框，用鼠标画出你想要截取的屏幕区域
 ctrl+alt+shift+u
+int mid = low + ((high - low )>> 1);
+
 
 一、视图查看
 Ctrl+F12 查看file，method结构图、类继承机构图
