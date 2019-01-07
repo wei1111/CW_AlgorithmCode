@@ -33,8 +33,8 @@ public class QuickSort2 {
 
     @Test
     public void test1() {
-        Integer[] arr = {0, 1, 1, 1 ,0};
-        int[] partition = partition(arr, 0, arr.length-1, 1);
+        Integer[] arr = {4, 6, 8, 5, 9};//{0, 1, 1, 1 ,0};
+        int[] partition = partition(arr, 0, arr.length - 1, 1);
         System.out.println(partition[0] + " " + partition[1]);
     }
 
@@ -51,9 +51,19 @@ public class QuickSort2 {
                 start++;
             }
         }
-
-        System.out.println(less + " " + more);
+//        String s1 = "chenw";
+//        s1.compareTo()
+        //这里一定要注意不要写什么less++ more--
         return new int[]{less + 1, more - 1};
+    }
+
+    @Test
+    public void test11() {
+        Integer[] nums = new Integer[]{4, 6, 8, 5, 9};
+        System.out.println("排前：" + Arrays.toString(nums));
+
+        quickSort(nums);
+        System.out.println("排后：" + Arrays.toString(nums));
     }
 
     @Test

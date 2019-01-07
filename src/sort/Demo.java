@@ -1,5 +1,7 @@
 package sort;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
@@ -15,30 +17,123 @@ public class Demo {
         quickSort(arr, 0, arr.length - 1);
     }
 
-    public static void quickSort(int[] arr, int l, int r) {
-        if (l < r) {
-            swap(arr, l + (int) (Math.random() * (r - l + 1)), r);
-            int[] p = partition(arr, l, r);
-            quickSort(arr, l, p[0] - 1);
-            quickSort(arr, p[1] + 1, r);
+    private static void quickSort(int[] arr, int start, int end) {
+        if (start < end) {
+            int ra = start + (int) (Math.random() * (end - start + 1));
+            int aim = arr[ra];
+            int[] partition = partition(arr, start, end, aim);
+
+            quickSort(arr, start, partition[0] - 1);
+            quickSort(arr, partition[1] + 1, end);
         }
     }
 
-    public static int[] partition(int[] arr, int l, int r) {
-        int less = l - 1;
-        int more = r;
-        while (l < more) {
-            if (arr[l] < arr[r]) {
-                swap(arr, ++less, l++);
-            } else if (arr[l] > arr[r]) {
-                swap(arr, --more, l);
+    @Test
+    public void test() {
+        int[] nums = new int[]{4, 6, 8, 5, 9};
+        System.out.println("排前：" + Arrays.toString(nums));
+
+        quickSort(nums);
+        System.out.println("排后：" + Arrays.toString(nums));
+    }
+
+    private static int[] partition(int[] arr, int start, int end, int aim) {
+        int less = start - 1;
+        int more = end + 1;
+        while (start < more) {
+            if (arr[start] < aim) {
+                swap(arr, ++less, start++);
+            } else if (arr[start] > aim) {
+                swap(arr, --more, start);
             } else {
-                l++;
+                start++;
             }
         }
-        swap(arr, more, r);
-        return new int[]{less + 1, more};
+        return new int[]{less + 1, more - 1};
     }
+
+    public static void heapSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        //建堆
+        for (int i = arr.length / 2 - 1; i >= 0; i--) {
+            adjustHeap(arr, i, arr.length - 1);
+        }
+
+        //排序
+        for (int i = arr.length - 1; i > 0; i--) {
+            swap(arr, i, 0);
+            adjustHeap(arr, 0, i - 1);
+        }
+    }
+
+
+    private static void adjustHeap(int[] arr, int i, int length) {
+        for (int j = 2 * i + 1; j <= length; j = 2 * i + 1) {
+            if (j + 1 <= length) {
+                if (arr[j + 1] > arr[j]) {
+                    j++;
+                }
+            }
+            if (arr[i] < arr[j]) {
+                swap(arr, j, i);
+                i = j;
+            } else {
+                break;
+            }
+        }
+    }
+
+    public static void mergeSort(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+
+        int[] temp = new int[arr.length];
+        mergeSort(arr, 0, arr.length - 1, temp);
+    }
+
+    @Test
+    public void testMerge() {
+        int[] nums = new int[]{4, 6, 8, 5, 9};
+        System.out.println("堆排前：" + Arrays.toString(nums));
+        mergeSort(nums);
+        System.out.println("堆排后：" + Arrays.toString(nums));
+    }
+
+    private static void mergeSort(int[] arr, int start, int end, int[] temp) {
+        if (start < end) {
+            int mid = start + ((end - start) >> 1);
+            mergeSort(arr, start, mid, temp);
+            mergeSort(arr, mid + 1, end, temp);
+            merge(arr, start, mid, end, temp);
+        }
+    }
+
+    private static void merge(int[] arr, int start, int mid, int end, int[] temp) {
+        int s = start;
+        int m = mid + 1;
+        int t = start;
+        while (start <= mid && m <= end) {
+            while (start <= mid && arr[start] <= arr[m]) {
+                temp[t++] = arr[start++];
+            }
+            while (m <= end && arr[start] > arr[m]) {
+                temp[t++] = arr[m++];
+            }
+        }
+        while (m <= end) {
+            temp[t++] = arr[m++];
+        }
+        while (start <= mid) {
+            temp[t++] = arr[start++];
+        }
+        for (int i = s; i <= end; i++) {
+            arr[i] = temp[i];
+        }
+    }
+
 
     public static void swap(int[] arr, int i, int j) {
         int tmp = arr[i];
@@ -112,7 +207,8 @@ public class Demo {
 //            int[] arr1 = generateRandomArray(maxSize, maxValue);
             int[] arr1 = {1, 1};
             int[] arr2 = copyArray(arr1);
-            quickSort(arr1);
+//            quickSort(arr1);
+            heapSort(arr1);
             comparator(arr2);
             if (!isEqual(arr1, arr2)) {
                 succeed = false;
@@ -125,9 +221,9 @@ public class Demo {
 
         int[] arr = generateRandomArray(maxSize, maxValue);
         printArray(arr);
-        quickSort(arr);
+//        quickSort(arr);
+        heapSort(arr);
         printArray(arr);
-
     }
 
 }

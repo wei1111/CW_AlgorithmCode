@@ -1,5 +1,9 @@
 package utils;
 
+import org.junit.Test;
+
+import java.util.Random;
+
 /**
  * @Author: wei1
  * @Date: Create in 2018/11/16 21:04
@@ -21,18 +25,56 @@ public class VerificationUtil {
         //产生的数组中的数的范围是-value ~ value
         for (int i = 0; i < arr.length; i++) {
             arr[i] = (int) ((range + 1) * Math.random()
-                    - (int) (range * Math.random()));
+                    - (int) ((range + 1) * Math.random()));
         }
         return arr;
     }
 
     // for test
     public static int[] getRandomIntArray(int maxLen, int maxValue) {
-        int[] res = new int[(int) (Math.random() * maxLen) + 1];
+        int[] res = new int[(int) (Math.random() * (maxLen + 1))];
         for (int i = 0; i != res.length; i++) {
-            res[i] = (int) (Math.random() * maxValue);
+            res[i] = (int) (Math.random() * (maxValue + 1));
         }
         return res;
+    }
+
+    //当minValue为负数时
+    public static int[] getRandomIntArray(int maxLen, int minValue, int maxValue) throws Exception {
+        if (minValue > maxValue) {
+            throw new Exception("minValue>maxValue error");
+        }
+
+        int[] res = new int[(int) (Math.random() * (maxLen + 1))];
+        for (int i = 0; i != res.length; i++) {
+            res[i] = minValue + (int) (Math.random() * (maxValue - minValue + 1));
+        }
+        return res;
+    }
+
+    //当minValue为负数时
+    public static Integer[] getRandomIntegerArray(int maxLen, int minValue, int maxValue) throws
+            Exception {
+        if (minValue > maxValue) {
+            throw new Exception("minValue>maxValue error");
+        }
+
+        Integer[] res = new Integer[(int) (Math.random() * (maxLen + 1))];
+        for (int i = 0; i != res.length; i++) {
+            res[i] = minValue + (int) (Math.random() * (maxValue - minValue + 1));
+        }
+        return res;
+    }
+
+    @Test
+    public void test() throws Exception {
+        int n = 10000;
+        Random random = new Random();
+
+        while (n-- > 0) {
+            int[] randomIntArray = getRandomIntArray(10, 10, 10);
+            printArray(randomIntArray);
+        }
     }
 
     public static int[] getLenRandomIntArray(int len, int maxValue) {

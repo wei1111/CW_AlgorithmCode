@@ -21,7 +21,7 @@ public class IsBalancedTree {
 
     public ReturnData isBalanced(TreeNode head) {
         if (head == null) {
-            return new ReturnData(0, false);
+            return new ReturnData(0, true);
         }
 
         ReturnData leftData = isBalanced(head.left);
@@ -37,13 +37,30 @@ public class IsBalancedTree {
             return new ReturnData(0, false);
         }
 
-        return new ReturnData(Math.abs(rightData.gaodu - leftData.gaodu) + 1, true);
+        return new ReturnData(Math.max(rightData.gaodu, leftData.gaodu) + 1, true);
     }
 
     @Test
     public void test() {
         TreeNode head = TreeNodeUtil.getTree();
-        ReturnData balanced = isBalanced(head);
-        System.out.println(balanced.isBalancedTree+" : "+ balanced.gaodu);
+
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(1);
+        root.left.right = new TreeNode(1);
+        root.left.right.left = new TreeNode(1);
+        root.left.right.right = new TreeNode(1);
+        root.left.left = new TreeNode(1);
+        root.left.left.right = new TreeNode(1);
+        root.left.left.left = new TreeNode(1);
+        root.left.left.left.right = new TreeNode(1);
+
+        root.right = new TreeNode(1);
+        root.right.left = new TreeNode(1);
+        root.right.right = new TreeNode(1);
+        root.right.right.left = new TreeNode(1);
+
+//        ReturnData balanced = isBalanced(head);
+        ReturnData balanced = isBalanced(root);
+        System.out.println(balanced.isBalancedTree + " : " + balanced.gaodu);
     }
 }

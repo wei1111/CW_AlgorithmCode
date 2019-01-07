@@ -3,6 +3,7 @@ package thread;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: wei1
@@ -26,7 +27,7 @@ import java.io.IOException;
  * 线程3： C -> B -> A -> D
  * 线程4： D -> C -> B -> A
  */
-public class ThreadOrderRun3 {
+public class ThreadOrderRun4 {
     File fileA = new File("A.txt");
     File fileB = new File("B.txt");
     File fileC = new File("C.txt");
@@ -35,8 +36,13 @@ public class ThreadOrderRun3 {
     FileWriter fwB;
     FileWriter fwC;
     FileWriter fwD;
+    volatile int fileAid = 1;
+    volatile int fileBid = 2;
+    volatile int fileCid = 3;
+    volatile int fileDid = 4;
+    CountDownLatch start = new CountDownLatch(1);
 
-    public ThreadOrderRun3() throws IOException {
+    public ThreadOrderRun4() throws IOException {
         //初始化创建文件A Ｂ C D
         if (fileA.exists() || fileB.exists() || fileC.exists() || fileD.exists()) {
             fileA.delete();
@@ -55,6 +61,7 @@ public class ThreadOrderRun3 {
     }
 
     private void firstRun(String str) throws IOException, InterruptedException {
+        start.await();
         while (true) {
 //            try {
 //                lock1.lock();
@@ -69,92 +76,150 @@ public class ThreadOrderRun3 {
 //            } finally {
 //                lock1.unlock();
 //            }
+            while (fileAid != 1) {
+
+            }
             synchronized (fileA) {
                 fileWriter("fileA", str);
+                fileAid = 2;
             }
-            Thread.sleep(50);
 
+            while (fileDid != 1) {
+
+            }
             synchronized (fileD) {
                 fileWriter("fileD", str);
+                fileDid = 2;
             }
-            Thread.sleep(50);
 
+            while (fileCid != 1) {
 
+            }
             synchronized (fileC) {
                 fileWriter("fileC", str);
+                fileCid = 2;
             }
-            Thread.sleep(50);
 
+            while (fileBid != 1) {
+
+            }
             synchronized (fileB) {
                 fileWriter("fileB", str);
+                fileBid = 2;
             }
-            Thread.sleep(50);
+
         }
 
     }
 
     private void secondRun(String str) throws IOException, InterruptedException {
+        start.await();
         while (true) {
+            while (fileBid != 2) {
+
+            }
             synchronized (fileB) {
                 fileWriter("fileB", str);
+                fileBid = 3;
             }
-            Thread.sleep(50);
+
+            while (fileAid != 2) {
+            }
             synchronized (fileA) {
                 fileWriter("fileA", str);
+                fileAid = 3;
             }
-            Thread.sleep(50);
+
+            while (fileDid != 2) {
+
+            }
             synchronized (fileD) {
                 fileWriter("fileD", str);
+                fileDid = 3;
             }
-            Thread.sleep(50);
 
+            while (fileCid != 2) {
+
+            }
             synchronized (fileC) {
                 fileWriter("fileC", str);
+                fileCid = 3;
             }
-            Thread.sleep(50);
+
         }
     }
 
     private void thirdRun(String str) throws IOException, InterruptedException {
+        start.await();
         while (true) {
+            while (fileCid != 3) {
+
+            }
             synchronized (fileC) {
                 fileWriter("fileC", str);
-            }
-            Thread.sleep(50);
-            synchronized (fileB) {
-                fileWriter("fileB", str);
+                fileCid = 4;
             }
 
-            Thread.sleep(50);
+            while (fileBid != 3) {
+
+            }
+            synchronized (fileB) {
+                fileWriter("fileB", str);
+                fileBid = 4;
+            }
+
+            while (fileAid != 3) {
+            }
             synchronized (fileA) {
                 fileWriter("fileA", str);
+                fileAid = 4;
             }
-            Thread.sleep(50);
+
+            while (fileDid != 3) {
+
+            }
             synchronized (fileD) {
                 fileWriter("fileD", str);
+                fileDid = 4;
             }
-            Thread.sleep(50);
+
         }
     }
 
     private void fourthRun(String str) throws IOException, InterruptedException {
+        start.await();
         while (true) {
+            while (fileDid != 4) {
+
+            }
             synchronized (fileD) {
                 fileWriter("fileD", str);
+                fileDid = 1;
             }
-            Thread.sleep(50);
+
+            while (fileCid != 4) {
+
+            }
             synchronized (fileC) {
                 fileWriter("fileC", str);
+                fileCid = 1;
             }
-            Thread.sleep(50);
+
+            while (fileBid != 4) {
+
+            }
             synchronized (fileB) {
                 fileWriter("fileB", str);
+                fileBid = 1;
             }
-            Thread.sleep(50);
+
+            while (fileAid != 4) {
+            }
             synchronized (fileA) {
                 fileWriter("fileA", str);
+                fileAid = 1;
             }
-            Thread.sleep(50);
+
         }
     }
 
@@ -182,12 +247,12 @@ public class ThreadOrderRun3 {
     }
 
     public static void main(String[] args) throws IOException {
-        ThreadOrderRun3 threadOrderRun3 = new ThreadOrderRun3();
+        ThreadOrderRun4 threadOrderRun4 = new ThreadOrderRun4();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    threadOrderRun3.firstRun("1 ");
+                    threadOrderRun4.firstRun("1 ");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -199,7 +264,7 @@ public class ThreadOrderRun3 {
             @Override
             public void run() {
                 try {
-                    threadOrderRun3.secondRun("2 ");
+                    threadOrderRun4.secondRun("2 ");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -211,7 +276,7 @@ public class ThreadOrderRun3 {
             @Override
             public void run() {
                 try {
-                    threadOrderRun3.thirdRun("3 ");
+                    threadOrderRun4.thirdRun("3 ");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -223,7 +288,7 @@ public class ThreadOrderRun3 {
             @Override
             public void run() {
                 try {
-                    threadOrderRun3.fourthRun("4 ");
+                    threadOrderRun4.fourthRun("4 ");
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
@@ -231,5 +296,7 @@ public class ThreadOrderRun3 {
                 }
             }
         }).start();
+
+        threadOrderRun4.start.countDown();
     }
 }
