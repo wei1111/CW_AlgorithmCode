@@ -5,7 +5,7 @@ import org.junit.Test;
 /**
  * @Author: wei1
  * @Date: Create in 2018/12/10 0:41
- * @Description: 求最长公共子序列的长度，==前一个比他小的结尾的子序列+1
+ * @Description: 求最长递增子序列的长度，==前一个比他小的结尾的子序列+1
  * dp
  */
 public class LengthOfMaxSubIncreaseArray {

@@ -2,6 +2,8 @@ package linkedList;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 /**
  * @Author: wei1
  * @Date: Create in 2018/12/18 19:55

@@ -9,25 +9,57 @@ import tree.TreeNode;
  * @Description:
  */
 public class Demo {
+
+    public boolean hasPath(char[] matrix, int rows, int cols, char[] str)
+    {
+        if(matrix==null||str==null||matrix.length!=(rows*cols)){
+            return false;
+        }
+        boolean[] hasVisit = new boolean[rows*cols];
+        boolean [] hasP = new boolean[1];
+        for(int i = 0;i<rows;i++){
+            for(int j = 0;j<cols;j++){
+                dfs(matrix,rows,cols,i,j,hasVisit,0,str,hasP);
+                if(hasP[0]){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void dfs(char[] matrix,int rows,int cols,int i,int j,boolean[] hasVisit,
+                    int size,char[] str,boolean[] hasP){
+        if(i<0||j<0||i>=rows||j>=cols){
+            return;
+        }
+        if(hasVisit[i*cols+j]||str[size]!=matrix[i*cols+j]){
+            return;
+        }
+        if(size==str.length-1){
+            hasP[0] = true;
+            return;
+        }
+        hasVisit[i*cols+j] = true;
+        dfs(matrix,rows,cols,i-1,j,hasVisit,size+1,str,hasP);
+        if(!hasP[0]){
+            dfs(matrix,rows,cols,i+1,j,hasVisit,size+1,str,hasP);
+        }
+        if(!hasP[0]){
+            dfs(matrix,rows,cols,i,j-1,hasVisit,size+1,str,hasP);
+        }
+        if(!hasP[0]){
+            dfs(matrix,rows,cols,i,j+1,hasVisit,size+1,str,hasP);
+        }
+        hasVisit[i*cols+j] = false;
+    }
+
     @Test
     public void test() {
-//        {1,2,3,4,5,#,#,#,#,6}
-        TreeNode root = new TreeNode(1);
-        root.left = new TreeNode(1);
-        root.left.right = new TreeNode(1);
-        root.left.right.left = new TreeNode(1);
-        root.left.right.right = new TreeNode(1);
-        root.left.left = new TreeNode(1);
-        root.left.left.right = new TreeNode(1);
-        root.left.left.left = new TreeNode(1);
-        root.left.left.left.right = new TreeNode(1);
-
-        root.right = new TreeNode(1);
-        root.right.left = new TreeNode(1);
-        root.right.right = new TreeNode(1);
-        root.right.right.left = new TreeNode(1);
-        boolean b = isBalance(root);
-//        boolean b = IsBalanced_Solution2(root);
+//"ABCE
+// SFCS
+// ADEE",3,4,"ABCCED"
+        boolean b = hasPath("ABCESFCSADEE".toCharArray(), 3, 4, "ABCCED".toCharArray());
         System.out.println(b);
     }
 

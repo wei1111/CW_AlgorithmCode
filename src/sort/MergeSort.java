@@ -21,10 +21,12 @@ public class MergeSort {
     }
 
     private void mSort(Integer[] nums, int start, int end, Integer[] temp) {
+        //这里一定要注意的是不能有== start>=end不行
         if (start != end) {
 //            int mid = (start + end) / 2;
             // 1.可以防止溢出int的范围
             // 2.使用右移操作快
+            // 3.这里一定要注意的是括号
             int mid = start + ((end - start) >> 1);
             mSort(nums, start, mid, temp);
             mSort(nums, mid + 1, end, temp);

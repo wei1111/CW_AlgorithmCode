@@ -6,12 +6,13 @@ import java.util.LinkedList;
 
 /**
  * @Author: wei1
- * @Date: Create in 2018/12/19 17:43
+ * @Date: Create in 2019/2/2 16:25
  * @Description:
  */
-public class Demo {
+public class AllPopSeq {
     @Test
     public void test() {
+        //已知进栈序列，求出栈序列
         //典型的卡特兰数
         // C(n) = (2n)!/((n+1)!*n!)  n = 4 C(n) = 14
         LinkedList<LinkedList<Integer>> linkedLists = allPopSeq(new int[]{1, 2, 3, 4});
@@ -63,5 +64,3 @@ public class Demo {
         }
     }
 }
-
-

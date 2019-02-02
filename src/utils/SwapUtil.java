@@ -12,7 +12,7 @@ public class SwapUtil {
         comparables[x] = t;
     }
 
-    public void swap(int[] arr, int x, int y){
+    public static void swap(int[] arr, int x, int y){
         if (arr == null || arr.length == 0 || x < 0 || y >= arr.length) {
             return;
         }

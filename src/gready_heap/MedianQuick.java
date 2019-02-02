@@ -30,6 +30,7 @@ public class MedianQuick {
         }
     }
 
+
     PriorityQueue<Integer> maxHeap = new PriorityQueue<>(new MaxHeapComparator());
     PriorityQueue<Integer> minHeap = new PriorityQueue<>(new MinHeapComparator());
 
