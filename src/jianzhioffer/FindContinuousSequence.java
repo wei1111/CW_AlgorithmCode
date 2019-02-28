@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * @Author: wei1
  * @Date: Create in 2019/1/9 23:42
- * @Description:
+ * @Description: 找出所有和为S的连续正数序列
  */
 public class FindContinuousSequence {
     public ArrayList<ArrayList<Integer>> findContinuousSequence(int sum) {

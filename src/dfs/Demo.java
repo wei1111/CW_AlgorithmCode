@@ -2,7 +2,10 @@ package dfs;
 
 import org.junit.Test;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * @Author: wei1
@@ -12,56 +15,53 @@ import java.util.LinkedList;
 public class Demo {
     @Test
     public void test() {
-        //典型的卡特兰数
-        // C(n) = (2n)!/((n+1)!*n!)  n = 4 C(n) = 14
-        LinkedList<LinkedList<Integer>> linkedLists = allPopSeq(new int[]{1, 2, 3, 4});
-        System.out.println(linkedLists.size());
-        linkedLists.forEach((l) -> {
-            System.out.println(l);
-        });
+        String[] strs = {"i am a coder", "Coder Coder", "Code"};
+        System.out.println(Arrays.toString(strs));
+        String[] coder = findCoder(strs, 3);
+        System.out.println(Arrays.toString(coder));
     }
 
-    public LinkedList<LinkedList<Integer>> allPopSeq(int[] input) {
-        LinkedList<LinkedList<Integer>> result = new LinkedList<>();
-        if (input == null || input.length == 0) {
-            return result;
+    public String[] findCoder(String[] A, int n) {
+        // write code here
+        ArrayList<FCoder> list = new ArrayList();
+        for (String str : A) {
+            int num = getCoderNum(str.toLowerCase());
+            if (num != 0) {
+                list.add(new FCoder(num, str));
+            }
         }
-
-        LinkedList<Integer> in = new LinkedList<>();
-        LinkedList<Integer> temp = new LinkedList<>();
-        LinkedList<Integer> out = new LinkedList<>();
-
-        for (int i : input) {
-            in.add(i);
+        Collections.sort(list, new Comparator<FCoder>() {
+            @Override
+            public int compare(FCoder o1, FCoder o2) {
+                return o2.size - o1.size;
+            }
+        });
+        String[] result = new String[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i).str;
         }
-        allPopSeq(result, in, temp, out, input.length);
         return result;
     }
 
-    private void allPopSeq(LinkedList<LinkedList<Integer>> result, LinkedList<Integer> in,
-                           LinkedList<Integer> temp,
-                           LinkedList<Integer> out, int len) {
-        if (out.size() == len) {
-            result.add(new LinkedList<>(out));
-            return;
+    public int getCoderNum(String str) {
+        int sum = 0;
+        int start = str.indexOf("coder");
+        int len = "coder".length();
+        while (start != -1) {
+            sum++;
+            start = start + len;
+            start = str.indexOf("coder", start);
         }
-        //出栈
-        if (temp.size() > 0) {
-            Integer t = temp.pop();
-            out.add(t);
-            allPopSeq(result, in, temp, out, len);
-            out.poll();
-            temp.push(t);
-        }
-        //入栈
-        if (in.size() > 0) {
-            Integer p = in.poll();
-            temp.push(p);
-            allPopSeq(result, in, temp, out, len);
-            temp.pop();
-            in.addFirst(p);
-        }
+        return sum;
     }
 }
 
+class FCoder {
+    int size;
+    String str;
 
+    public FCoder(int size, String str) {
+        this.size = size;
+        this.str = str;
+    }
+}

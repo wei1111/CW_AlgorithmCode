@@ -12,7 +12,7 @@ public class Singleton3 {
 
     }
 
-    public Singleton3 getInstance() {
+    public static final Singleton3 getInstance() {
         if (singleton3 == null) {
             synchronized (Singleton3.class) {
                 if (singleton3 == null) {

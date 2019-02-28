@@ -6,10 +6,10 @@ import java.util.LinkedList;
 
 /**
  * @Author: wei1
- * @Date: Create in 2019/1/31 18:32
- * @Description: 背包
+ * @Date: Create in 2019/2/28 0:49
+ * @Description: 背包 选钱
  */
-public class Demo {
+public class Coins {
     int len = 0;
 
     public int coins(int[] arr, int sum) {
@@ -58,5 +58,4 @@ public class Demo {
         }
         return dp[0][sum];
     }
-
 }

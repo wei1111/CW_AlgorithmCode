@@ -117,6 +117,7 @@ public class PreInPosTraversal {
             }
         }
     }
+    //shift+esc 关闭
 
     //中序遍历的非递归的写法，
     // 1.左节点不为null则压入左节点
@@ -133,7 +134,7 @@ public class PreInPosTraversal {
         Stack<TreeNode> stack = new Stack<>();
         while (!stack.isEmpty() || head != null) {
             if (head != null) {
-                stack.add(head);
+                stack.push(head);
                 head = head.left;
             } else {
                 head = stack.pop();
@@ -155,16 +156,16 @@ public class PreInPosTraversal {
         System.out.print("pos-order: ");
         Stack<TreeNode> stack = new Stack<>();
         Stack<TreeNode> stack2 = new Stack<>();
-        stack.add(head);
+        stack.push(head);
         while (!stack.isEmpty()) {
             head = stack.pop();
             //在这里不打印，这里我们放到第二个栈中去
-            stack2.add(head);
+            stack2.push(head);
             if (head.left != null) {
-                stack.add(head.left);
+                stack.push(head.left);
             }
             if (head.right != null) {
-                stack.add(head.right);
+                stack.push(head.right);
             }
         }
         while (!stack2.isEmpty()) {
@@ -212,14 +213,12 @@ public class PreInPosTraversal {
         preOrderRecur(head);
 
         System.out.println();
-        Demo.preOrderUnRecur(head);
 
         System.out.println();
         System.out.print("in-order: ");
         inOrderRecur(head);
 
         System.out.println();
-        Demo.inOrderUnRecur(head);
 
         System.out.println();
         System.out.print("pos-order: ");

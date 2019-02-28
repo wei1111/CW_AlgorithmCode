@@ -2,7 +2,7 @@ package designPattern;
 
 public class Singleton1 {
     //懒汉式LazyHolder Singleton 调用static类型的getInstance方法后才得到对象实体
-    private Singleton1(){
+    private Singleton1() {
 
     }
 
@@ -11,7 +11,7 @@ public class Singleton1 {
         private static final Singleton1 INSTANCE = new Singleton1();
     }
 
-    public static final Singleton1 getInstance (){
+    public static final Singleton1 getInstance() {
         return SingletonHolder.INSTANCE;
     }
 }

@@ -12,10 +12,11 @@ import java.util.LinkedList;
 public class AllPopSeq {
     @Test
     public void test() {
-        //已知进栈序列，求出栈序列
+        //已知进栈序列，求出栈序列||已知出栈序列求所有的入栈序列
         //典型的卡特兰数
         // C(n) = (2n)!/((n+1)!*n!)  n = 4 C(n) = 14
-        LinkedList<LinkedList<Integer>> linkedLists = allPopSeq(new int[]{1, 2, 3, 4});
+//        LinkedList<LinkedList<Integer>> linkedLists = allPopSeq(new int[]{1, 2, 3, 4});
+        LinkedList<LinkedList<Integer>> linkedLists = allPopSeq(new int[]{4, 3, 2, 1});
         System.out.println(linkedLists.size());
         linkedLists.forEach((l) -> {
             System.out.println(l);
@@ -51,7 +52,7 @@ public class AllPopSeq {
             Integer t = temp.pop();
             out.add(t);
             allPopSeq(result, in, temp, out, len);
-            out.poll();
+            out.pollLast();
             temp.push(t);
         }
         //入栈
@@ -64,3 +65,4 @@ public class AllPopSeq {
         }
     }
 }
+
