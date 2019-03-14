@@ -39,6 +39,7 @@ public class IsLands {
         return result;
     }
 
+    //感染函数
     public void infect(int[][] m, int i, int j, int N, int M) {
         if (i >= 0 && i < N && j >= 0 && j < M && m[i][j] == 1) {
             m[i][j] = 2;

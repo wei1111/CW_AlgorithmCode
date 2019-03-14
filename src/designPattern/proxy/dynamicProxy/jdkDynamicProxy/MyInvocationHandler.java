@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
  * @Description: 这个类就是jdk动态代理类proxy调用的方法，在invoke中对我们的目标类进行了代理
  */
 public class MyInvocationHandler implements InvocationHandler {
-    Object target = new Object();
+    Object target;
 
     public MyInvocationHandler(Object o) {
         this.target = o;

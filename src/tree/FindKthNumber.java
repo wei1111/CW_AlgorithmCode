@@ -2,10 +2,12 @@ package tree;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 /**
  * @Author: wei1
  * @Date: Create in 2019/1/31 19:04
- * @Description:
+ * @Description: 字典序第k小的数字
  */
 public class FindKthNumber {
 
@@ -16,7 +18,7 @@ public class FindKthNumber {
             System.out.println(kthNumber);
         }
     }
-
+//    http://www.cnblogs.com/grandyang/p/6031787.html
     public int findKthNumber(int n, int k) {
         int cur = 1;
         int step;
@@ -42,5 +44,32 @@ public class FindKthNumber {
             n2 *= 10;
         }
         return step;
+    }
+
+    //字典排序数字1-n
+    public int[] lexicalOrder(int n) {
+        int[] res = new int[n];
+        int cur = 1;
+        for (int i = 0; i < n; ++i) {
+            res[i] = cur;
+            if (cur * 10 <= n) {
+                cur *= 10;
+            } else {
+                if (cur >= n) {
+                    cur /= 10;
+                }
+                cur += 1;
+                while (cur % 10 == 0) {
+                    cur /= 10;
+                }
+            }
+        }
+        return res;
+    }
+
+    @Test
+    public void test2() {
+        int[] ints = lexicalOrder(30);
+        System.out.println(Arrays.toString(ints));
     }
 }

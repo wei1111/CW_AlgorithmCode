@@ -14,4 +14,8 @@ public class Singleton2 {
     public static final Singleton2 getInstance (){
         return INSTANCE2;
     }
+
+    public static void main(String[] args) {
+//        Singleton1.SingletonHolder.INSTANCE;
+    }
 }
