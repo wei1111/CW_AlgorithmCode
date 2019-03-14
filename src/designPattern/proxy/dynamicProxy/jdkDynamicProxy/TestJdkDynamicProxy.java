@@ -30,7 +30,7 @@ public class TestJdkDynamicProxy {
                 (TargetInterface) Proxy.newProxyInstance(targetObject.getClass()
                                 .getClassLoader(),
                         targetObject.getClass()
-                                .getInterfaces(), myInvocationHandler);
+                                 .getInterfaces(), myInvocationHandler);
         proxyInstance.business();
     }
 }
