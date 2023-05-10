@@ -1,6 +1,7 @@
 package bfs;
 
 import org.junit.Test;
+import org.testng.annotations.Test;
 import tree.TreeNode;
 
 import java.util.LinkedList;
@@ -20,8 +21,8 @@ public class LevelOrder {
      * 3
      * / \
      * 9  20
-     * /  \
-     * 15   7
+     *   /  \
+     *  15   7
      * 返回他的分层遍历结果：
      * <p>
      * [

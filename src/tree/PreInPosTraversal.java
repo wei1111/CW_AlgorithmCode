@@ -14,6 +14,7 @@ import java.util.Stack;
  */
 public class PreInPosTraversal {
 
+    // 二叉树前序遍历
     public ArrayList<Integer> postorderTraversal(TreeNode root) {
         ArrayList<Integer> arrayList = new ArrayList<>();
         if (root == null) {

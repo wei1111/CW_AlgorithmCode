@@ -13,6 +13,7 @@ import java.util.Stack;
  * 当前节点为null就弹出来，往右移
  */
 public class IsBSTAndCBT {
+
     //思路就是通过中序遍历，如果是递增的就是BST
     public static boolean isBST(TreeNode head) {
         if (head == null) {
@@ -71,7 +72,7 @@ public class IsBSTAndCBT {
 
     @Test
     public void test() {
-        TreeNode head = TreeNodeUtil.getTree();
+        tree.TreeNode head = TreeNodeUtil.getTree();
         System.out.println(isBST(head));
     }
 
@@ -83,7 +84,7 @@ public class IsBSTAndCBT {
         head.left.right = new TreeNode(3);
         head.right.left = new TreeNode(5);
 
-        PrintBinaryTree.printTree(head);
+        tree.PrintBinaryTree.printTree(head);
         System.out.println(isBST(head));
         System.out.println(isCBT(head));
 
